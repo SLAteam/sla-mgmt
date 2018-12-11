@@ -16,6 +16,11 @@ class KeyPerformanceIndicatorAdmin(admin.ModelAdmin):
     list_display = ['id','name','aggregation_type','operator','created_at']
     list_filter = ['aggregation_type','operator']
 
+    def get_queryset(self, request):
+        if request.user.is_superuser:
+            return KeyPerformanceIndicator.objects.all()
+        return KeyPerformanceIndicator.objects.filter(operator__user=request.user)
+
 # Register your models here.
 admin.site.register(Operator, OperatorAdmin)
 admin.site.register(AggregationType, AggregationTypeAdmin)
