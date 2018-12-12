@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404
-from models import KeyPerformanceIndicator, Operator, AggregationType
+from django.shortcuts import render_to_response, get_object_or_404
+from django.contrib.auth.models import User
+from sla_app.models import KeyPerformanceIndicator, Operator, AggregationType
 
 
 def get_kpi_by_name(kpi_name):
@@ -36,3 +37,17 @@ def get_operator_by_name(oper_name):
 
 def get_operator_by_id(oper_id):
     return Operator.objects.get(id = oper_id)
+
+
+def index(request):
+    return render_to_response('index.html', context)
+
+def kpi(request):
+    kpi_list = []
+    if request.user.is_authenticated:
+        kpi_list = get_all_kpis_for_user(request.user.id)
+
+    context = { 'kpi_list' : kpi_list }
+
+    return render_to_response('kpi.html', context)
+
