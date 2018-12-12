@@ -1,0 +1,11 @@
+<html>
+	<head>
+	</head>
+	<body>
+		{% for kpi in kpi_list %}
+		<div class="post-item">
+			{{ kpi.name }} {{ kpi.value }} <br>
+		</div>
+		{% endfor %}
+	</body>
+</html>
