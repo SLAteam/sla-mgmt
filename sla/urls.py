@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import url
 import sla_app
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('sla_app.urls'))
+    url(r'^$', include('sla_app.urls')),
+    url(r'^admin/', admin.site.urls),
+    url(r'^account/', include('accounts.urls'))
+  #  path('', include('sla_app.urls'))
 ]
