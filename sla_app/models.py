@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Operator(models.Model):
-    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=128)
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
@@ -25,7 +24,7 @@ class KeyPerformanceIndicator(models.Model):
     value = models.DecimalField(max_digits=20, decimal_places=10)
     country = models.CharField(max_length=30, null=True, blank=True)
     comment = models.TextField(null=True, blank=True)
-    created_at = models.TextField(null=True, blank=True)
+    created_at = models.DateTimeField(null=True, blank=True)
     kpi_count = models.BigIntegerField(null=True, blank=True)
     symbol = models.CharField(max_length=50, null=True, blank=True)
 
