@@ -13,26 +13,31 @@ def get_kpi_by_id(self,kpi_id):
 
 #poniższa funkcja generowała wykres na potrzeby sprintu 3
 def get_kpi_by_country(self,kpi_country):
-    
 	data = KeyPerformanceIndicator.objects.filter(country=kpi_country)
 	kpi_list = []
 	kpi_list = data
 	country = data[0].country
 	context = { 'country' : country, 'kpi_list' : kpi_list }
 
-	return render_to_response('uviewer.html', context)
+	return render_to_response('viewer.html', context)
 
-def get_kpi_by_oper(self,oper_id):
-	data = KeyPerformanceIndicator.objects.filter(operator=oper_id)
+def get_kpi_by_oper(request, oper_id):
+	if request.user.is_authenticated:
+		data = KeyPerformanceIndicator.objects.filter(operator=oper_id)
 	name_list = data.values('name').distinct
 	kpi_list = []
 	kpi_list = data
-	operator = data[0].operator
-	country = data[0].country
-	context = { 'country' : country, 'operator' : operator, 'kpi_list' : kpi_list, 'name_list' : name_list }
+	context = { 'country' : data[0].country, 'operator' : data[0].operator, 'kpi_list' : kpi_list, 'name_list' : name_list }
 
-	return render_to_response('uviewer.html', context)
+	return render_to_response('viewer.html', context)
 
+def get_kpi_by_user(request):
+	oper = get_operator_for_user_id(request.user.id)
+	data = KeyPerformanceIndicator.objects.filter(operator=oper.id)
+	kpi_list = []
+	context = { 'country' : data[0].country, 'operator' : oper.id, 'kpi_list' : data, 'name_list' : data.values('name').distinct }
+
+	return render_to_response('viewer.html', context)
 
 def get_operator_for_user_id(user_id):
     u = User.objects.get(id = user_id)
