@@ -1,14 +1,37 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.models import User
 from sla_app.models import KeyPerformanceIndicator, Operator, AggregationType
+from django.http import HttpResponse
 
 
 def get_kpi_by_name(kpi_name):
     return KeyPerformanceIndicator.objects.get(name=kpi_name)
 
 
-def get_kpi_by_id(kpi_id):
+def get_kpi_by_id(self,kpi_id):
     return KeyPerformanceIndicator.objects.get(id=kpi_id)
+
+#poniższa funkcja generowała wykres na potrzeby sprintu 3
+def get_kpi_by_country(self,kpi_country):
+    
+	data = KeyPerformanceIndicator.objects.filter(country=kpi_country)
+	kpi_list = []
+	kpi_list = data
+	country = data[0].country
+	context = { 'country' : country, 'kpi_list' : kpi_list }
+
+	return render_to_response('uviewer.html', context)
+
+def get_kpi_by_oper(self,oper_id):
+	data = KeyPerformanceIndicator.objects.filter(operator=oper_id)
+	name_list = data.values('name').distinct
+	kpi_list = []
+	kpi_list = data
+	operator = data[0].operator
+	country = data[0].country
+	context = { 'country' : country, 'operator' : operator, 'kpi_list' : kpi_list, 'name_list' : name_list }
+
+	return render_to_response('uviewer.html', context)
 
 
 def get_operator_for_user_id(user_id):
@@ -50,4 +73,8 @@ def kpi(request):
     context = { 'kpi_list' : kpi_list }
 
     return render_to_response('kpi.html', context)
+def get_all_kpi(request):
+    data = KeyPerformanceIndicator.objects.all()
+
+    return HttpResponse(data)
 
