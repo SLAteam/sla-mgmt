@@ -2,10 +2,6 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.models import User
 from sla_app.models import KeyPerformanceIndicator, Operator, AggregationType
 from django.http import HttpResponse
-<<<<<<< HEAD
-
-=======
->>>>>>> Dodanie panelu logowania
 
 def get_kpi_by_name(kpi_name):
     return KeyPerformanceIndicator.objects.get(name=kpi_name)
