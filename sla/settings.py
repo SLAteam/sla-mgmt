@@ -121,4 +121,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = '/viewer/loggedin'
+LOGIN_REDIRECT_URL = '/'

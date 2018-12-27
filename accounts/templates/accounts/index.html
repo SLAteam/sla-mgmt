@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Logged in</title>
+</head>
+<body>
+	{% if user.is_authenticated %}
+	<h1>LOL! You are logged in as: {{ user.username }}<h1>
+	{% else %}
+	<h1>You are not logged in!</h1> 
+	<h3>Please proceed to this <a href="http://127.0.0.1:8000/accounts/login/"> link </a> to log in</h3>
+	{% endif %}
+</body>
+</html>

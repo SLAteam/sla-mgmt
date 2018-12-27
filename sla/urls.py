@@ -22,6 +22,7 @@ urlpatterns = [
 #   url(r'^$', include('sla_app.urls')),
     url(r'^viewer/', include('sla_app.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^account/', include('accounts.urls'))
-  #  path('', include('sla_app.urls'))
+    #url(r'^account/', include('accounts.urls')),
+    path('', include('accounts.urls')),
+    path('accounts/', include('django.contrib.auth.urls'))
 ]
