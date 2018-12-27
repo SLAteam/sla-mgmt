@@ -79,3 +79,7 @@ def kpi(request):
     context = { 'kpi_list' : kpi_list }
 
     return render_to_response('kpi.html', context)
+
+
+def loggedin(request):
+    return render_to_response('loggedin.html')

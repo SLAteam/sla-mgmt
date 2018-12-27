@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Logged in</title>
+</head>
+<body>
+	{% if user.is_authenticated %}
+	<h1>LOL! You are logged in {{ user.username }}<h1>
+	{% else %}
+	<h1>You are not logged in<h1>
+	{% endif %}
+</body>
+</html>

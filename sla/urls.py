@@ -19,7 +19,8 @@ from django.conf.urls import url
 import sla_app
 
 urlpatterns = [
-    url(r'^$', include('sla_app.urls')),
+#   url(r'^$', include('sla_app.urls')),
+    url(r'^viewer/', include('sla_app.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^account/', include('accounts.urls'))
   #  path('', include('sla_app.urls'))
